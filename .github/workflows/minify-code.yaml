@@ -1,0 +1,23 @@
+name: Minify Code
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  minify:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository
+      - uses: actions/checkout@v3
+
+      # Minify coede
+      - name: Minify
+        uses: anthonyftwang/minify-action@v1.0.1
+
+      # Auto-commit to branch "production"
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          create_branch: true
+          branch: production
+          commit_message: Minify source code
+          push_options: '--force'
